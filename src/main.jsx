@@ -20,6 +20,25 @@ const images = {
   restaurant: 'https://customer-assets.emergentagent.com/job_b2994803-023a-4b5e-84ff-4f83f3c66501/artifacts/hskji8th_image.webp'
 };
 
+// Vite's BASE_URL reflects the `base` set in vite.config.js. Locally that's '/',
+// but on GitHub Pages project sites it's '/<repo-name>/', so every internal link
+// and every route check needs to go through these two helpers instead of
+// assuming the site lives at the domain root.
+const BASE_URL = import.meta.env.BASE_URL;
+
+function withBase(path) {
+  if (path === '/') return BASE_URL;
+  return BASE_URL + path.slice(1);
+}
+
+function getRoute() {
+  const baseNoSlash = BASE_URL.endsWith('/') ? BASE_URL.slice(0, -1) : BASE_URL;
+  const pathname = window.location.pathname;
+  if (pathname === baseNoSlash || pathname === BASE_URL) return '/';
+  if (pathname.startsWith(BASE_URL)) return '/' + pathname.slice(BASE_URL.length);
+  return pathname;
+}
+
 const tickerItems = [
   'Smoked BBQ Chicken',
   'Fresh Fried Catfish',
@@ -253,29 +272,29 @@ const menuSections = [
 
 function Nav() {
   const [open, setOpen] = React.useState(false);
-  const path = window.location.pathname;
-  const isMenuPage = path === '/menu';
-  const isLegalPage = path === '/privacy' || path === '/terms';
+  const route = getRoute();
+  const isMenuPage = route === '/menu';
+  const isLegalPage = route === '/privacy' || route === '/terms';
   const links = isMenuPage
     ? [
-        ['Home', '/'],
-        ['Visit', '/#visit']
+        ['Home', withBase('/')],
+        ['Visit', withBase('/#visit')]
       ]
     : isLegalPage
     ? [
-        ['Home', '/'],
-        ['Menu', '/menu'],
-        ['Visit', '/#visit']
+        ['Home', withBase('/')],
+        ['Menu', withBase('/menu')],
+        ['Visit', withBase('/#visit')]
       ]
     : [
-        ['Menu', '/menu'],
+        ['Menu', withBase('/menu')],
         ['Reviews', '#reviews'],
         ['Visit', '#visit']
       ];
 
   return (
     <header className="site-header">
-      <a className="brand" href="/" aria-label="Country Sunrise Grill & BBQ home">
+      <a className="brand" href={withBase('/')} aria-label="Country Sunrise Grill & BBQ home">
         <img src={images.logo} alt="Country Sunrise Grill & BBQ logo" />
       </a>
       <button className="menu-toggle" onClick={() => setOpen(!open)} aria-label="Toggle navigation">
@@ -438,7 +457,7 @@ function MenuPage() {
         <h1>Full Menu</h1>
         <p>Breakfast, lunch plates, seafood, steaks, sides, vegetables, desserts, and drinks from the Country Sunrise menu.</p>
         <div className="hero-actions">
-          <a className="btn navy" href="/">
+          <a className="btn navy" href={withBase('/')}>
             <ArrowRight size={18} /> Back Home
           </a>
           <a className="btn brick" href="tel:+12528237183">
@@ -489,10 +508,10 @@ function PrivacyPage() {
           used, and the choices available to you.
         </p>
         <div className="hero-actions">
-          <a className="btn navy" href="/">
+          <a className="btn navy" href={withBase('/')}>
             <ArrowRight size={18} /> Back Home
           </a>
-          <a className="btn brick" href="/terms">
+          <a className="btn brick" href={withBase('/terms')}>
             View Terms Of Service
           </a>
         </div>
@@ -593,10 +612,10 @@ function TermsPage() {
         <p className="updated">Last updated: July 11, 2026</p>
         <p>These Terms of Service ("Terms") govern use of this website. By using this site, you agree to these Terms.</p>
         <div className="hero-actions">
-          <a className="btn navy" href="/">
+          <a className="btn navy" href={withBase('/')}>
             <ArrowRight size={18} /> Back Home
           </a>
-          <a className="btn brick" href="/privacy">
+          <a className="btn brick" href={withBase('/privacy')}>
             View Privacy Policy
           </a>
         </div>
@@ -699,8 +718,8 @@ function Footer() {
         <span>2026 Country Sunrise Grill & BBQ - Tarboro, NC</span>
         <span>Dine-in - Takeout - Delivery</span>
         <nav className="footer-links" aria-label="Legal">
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/terms">Terms of Service</a>
+          <a href={withBase('/privacy')}>Privacy Policy</a>
+          <a href={withBase('/terms')}>Terms of Service</a>
         </nav>
       </div>
       <p>The FDA advises consuming raw or undercooked meats, poultry, seafood or eggs increases your risk of foodborne illness.</p>
@@ -721,11 +740,11 @@ function HomePage() {
 }
 
 function App() {
-  const path = window.location.pathname;
+  const route = getRoute();
   let page = <HomePage />;
-  if (path === '/menu') page = <MenuPage />;
-  else if (path === '/privacy') page = <PrivacyPage />;
-  else if (path === '/terms') page = <TermsPage />;
+  if (route === '/menu') page = <MenuPage />;
+  else if (route === '/privacy') page = <PrivacyPage />;
+  else if (route === '/terms') page = <TermsPage />;
 
   return (
     <>
