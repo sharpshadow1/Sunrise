@@ -13,11 +13,17 @@ import {
   X
 } from 'lucide-react';
 import './styles.css';
+import logoImg from './assets/logo.png';
+import heroSignImg from './assets/hero-sign.png';
+import restaurantImg from './assets/restaurant.webp';
 
+// Bundled locally (rather than linked to the emergentagent.com CDN they were
+// originally generated on) so the site doesn't depend on a third-party host
+// staying up.
 const images = {
-  logo: 'https://static.prod-images.emergentagent.com/jobs/b2994803-023a-4b5e-84ff-4f83f3c66501/images/b023d784d8ba851ffe5ba118e5272859c60772bfda438747d37b218d7ea7a37d.png',
-  sign: 'https://customer-assets.emergentagent.com/job_grill-tarboro/artifacts/oplepns9_PXL_20260708_122100764-removebg-preview.png',
-  restaurant: 'https://customer-assets.emergentagent.com/job_b2994803-023a-4b5e-84ff-4f83f3c66501/artifacts/hskji8th_image.webp'
+  logo: logoImg,
+  sign: heroSignImg,
+  restaurant: restaurantImg
 };
 
 // Vite's BASE_URL reflects the `base` set in vite.config.js. Locally that's '/',
