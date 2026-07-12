@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Country Sunrise Grill & BBQ</title>
+    <script>
+      // GitHub Pages has no server-side routing, so a direct hit, refresh, or
+      // shared link to an app route (e.g. /Sunrise/menu) 404s here instead of
+      // reaching the React app. This repacks the intended path into a query
+      // string and redirects to the app root; index.html unpacks it via
+      // history.replaceState before rendering, so the right page shows with
+      // no visible flash. Standard trick for SPAs on GitHub Pages project
+      // sites (see rafgraph/spa-github-pages).
+      //
+      // pathSegmentsToKeep must match the number of segments in `base` from
+      // vite.config.js (currently base: '/Sunrise/' => 1 segment).
+      var pathSegmentsToKeep = 1;
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?p=/' +
+        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body></body>
+</html>

@@ -740,7 +740,51 @@ function HomePage() {
 }
 
 function App() {
-  const route = getRoute();
+  const [route, setRoute] = React.useState(getRoute());
+
+  // Back/forward navigation, and our own pushState calls below (which don't
+  // fire popstate natively), both flow through this one listener.
+  React.useEffect(() => {
+    const onRouteChange = () => setRoute(getRoute());
+    window.addEventListener('popstate', onRouteChange);
+    return () => window.removeEventListener('popstate', onRouteChange);
+  }, []);
+
+  // Intercept clicks on in-app links so navigation is instant instead of a
+  // full page reload. External links, tel: links, same-page hash anchors
+  // (#reviews, #visit), new-tab clicks, and modifier-clicks are left alone.
+  React.useEffect(() => {
+    function onClick(event) {
+      if (event.defaultPrevented || event.button !== 0) return;
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const link = event.target.closest('a');
+      if (!link || link.target || link.hasAttribute('download')) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+      const url = new URL(href, window.location.href);
+      if (url.origin !== window.location.origin) return;
+      if (url.pathname === window.location.pathname) return;
+      event.preventDefault();
+      window.history.pushState(null, '', url.pathname + url.search + url.hash);
+      setRoute(getRoute());
+    }
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
+  }, []);
+
+  // Full page loads let the browser jump to a #hash on its own; client-side
+  // route changes need that handled manually once the new page has rendered.
+  React.useEffect(() => {
+    if (window.location.hash) {
+      const target = document.querySelector(window.location.hash);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+    }
+    window.scrollTo(0, 0);
+  }, [route]);
+
   let page = <HomePage />;
   if (route === '/menu') page = <MenuPage />;
   else if (route === '/privacy') page = <PrivacyPage />;
