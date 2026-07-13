@@ -56,12 +56,12 @@ const tickerItems = [
 ];
 
 const hours = [
-  ['Monday', '6am-2pm'],
-  ['Tuesday', '6am-8pm'],
-  ['Wednesday', '6am-8pm'],
-  ['Thursday', '6am-8pm'],
-  ['Friday', '6am-8pm'],
-  ['Saturday', '6am-8pm'],
+  ['Monday', '5am-2pm'],
+  ['Tuesday', '5am-8pm'],
+  ['Wednesday', '5am-8pm'],
+  ['Thursday', '5am-8pm'],
+  ['Friday', '5am-8pm'],
+  ['Saturday', '5am-8pm'],
   ['Sunday', 'Closed']
 ];
 
@@ -335,16 +335,18 @@ function Hero() {
             <a className="btn navy" href="https://www.google.com/maps/search/?api=1&query=1023+W+St+James+St+Tarboro+NC+27886">
               Get Directions <ArrowRight size={18} />
             </a>
-            <a className="btn brick" href="tel:+12528237183">
+            <a className="btn brick call-desktop" href="https://www.google.com/maps/search/?api=1&query=1023+W+St+James+St+Tarboro+NC+27886">
+              <Phone size={18} /> (252) 823-7183
+            </a>
+            <a className="btn brick call-mobile" href="tel:+12528237183">
               <Phone size={18} /> (252) 823-7183
             </a>
           </div>
           <div className="quick-facts">
             <span>Dine-in</span>
             <span>Takeout</span>
-            <span>Delivery</span>
-            <strong>Mon 6am-2pm</strong>
-            <strong>Tue-Sat 6am-8pm</strong>
+            <strong>Mon 5am-2pm</strong>
+            <strong>Tue-Sat 5am-8pm</strong>
           </div>
         </div>
         <div className="hero-art" aria-hidden="true">
@@ -722,7 +724,7 @@ function Footer() {
       <div className="footer-main">
         <img src={images.logo} alt="Country Sunrise Grill & BBQ" />
         <span>2026 Country Sunrise Grill & BBQ - Tarboro, NC</span>
-        <span>Dine-in - Takeout - Delivery</span>
+        <span>Dine-in - Takeout</span>
         <nav className="footer-links" aria-label="Legal">
           <a href={withBase('/privacy')}>Privacy Policy</a>
           <a href={withBase('/terms')}>Terms of Service</a>
