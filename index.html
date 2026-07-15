@@ -9,16 +9,12 @@
       // link to a route like /menu renders that route instead of the
       // query-string bounce GitHub Pages sent it through.
       (function (l) {
-        if (l.search[1] === 'p' && l.search.indexOf('/', 2) === 2) {
-          var decoded = l.search
-            .slice(1)
-            .split('&')
-            .map(function (s) {
-              return s.replace(/~and~/g, '&');
-            })
-            .join('?');
-          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
-        }
+        if (l.search.slice(0, 4) !== '?p=/') return;
+        var rest = l.search.slice(3);
+        var qIndex = rest.indexOf('&q=');
+        var path = (qIndex === -1 ? rest : rest.slice(0, qIndex)).replace(/~and~/g, '&');
+        var query = qIndex === -1 ? '' : '?' + rest.slice(qIndex + 3).replace(/~and~/g, '&');
+        window.history.replaceState(null, null, l.pathname.slice(0, -1) + path + query + l.hash);
       })(window.location);
     </script>
   </head>
