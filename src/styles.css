@@ -142,10 +142,6 @@ img {
   color: white;
 }
 
-.call-mobile {
-  display: none;
-}
-
 .menu-toggle {
   background: transparent;
   border: 0;
@@ -987,14 +983,6 @@ footer p {
 @media (max-width: 920px) {
   .menu-toggle {
     display: inline-grid;
-  }
-
-  .call-desktop {
-    display: none;
-  }
-
-  .call-mobile {
-    display: inline-flex;
   }
 
   .nav-links {

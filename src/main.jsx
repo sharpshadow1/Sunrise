@@ -335,10 +335,7 @@ function Hero() {
             <a className="btn navy" href="https://www.google.com/maps/search/?api=1&query=1023+W+St+James+St+Tarboro+NC+27886">
               Get Directions <ArrowRight size={18} />
             </a>
-            <a className="btn brick call-desktop" href="https://www.google.com/maps/search/?api=1&query=1023+W+St+James+St+Tarboro+NC+27886">
-              <Phone size={18} /> (252) 823-7183
-            </a>
-            <a className="btn brick call-mobile" href="tel:+12528237183">
+            <a className="btn brick" href="tel:+12528237183">
               <Phone size={18} /> (252) 823-7183
             </a>
           </div>
