@@ -65,32 +65,30 @@ const hours = [
   ['Sunday', 'Closed']
 ];
 
-const googleReviewsUrl = 'https://www.google.com/maps/search/?api=1&query=Country+Sunrise+Grill+%26+BBQ+1023+W+St+James+St+Tarboro+NC+reviews';
-
 const reviews = [
   {
     initial: 'R',
     name: 'Ronnie Woodard',
     time: 'a month ago',
     meta: 'Local Guide - 46 reviews - 55 photos',
-    url: `${googleReviewsUrl}+Ronnie+Woodard`,
-    text: 'We tried the lunch special today which was bbq chicken plate, it was cooked perfectly, found out it was smoked in a smoker which added great flavor and texture. I had slaw and fries while my wife had okra and cabbage. All the sides were fantastic.'
+    url: 'https://maps.app.goo.gl/FK58xBQhNuZpZJt99',
+    text: "We tried the lunch special today which was bbq chicken plate, it was cooked perfectly, found out it was smoked in a smoker which added great flavor and texture. I had slaw and fries while my wife had okra and cabbage. All the sides were great! This is a small diner so get there early and grab a table. You won't regret it. Also found out they serve breakfast all day!"
   },
   {
     initial: 'T',
     name: 'Tyler Manring',
     time: '2 months ago',
     meta: 'Local Guide - 37 reviews - 8 photos',
-    url: `${googleReviewsUrl}+Tyler+Manring`,
-    text: "Food was amazing and service was good ole southern hospitality. This is a place that you don't forget 100% recommend this place."
+    url: 'https://maps.app.goo.gl/XpD5Sr1PmyjsQNR4A',
+    text: "Food was amazing and service was good ole southern hospitality. This is a place that you don't forget 100% recommend this place"
   },
   {
     initial: 'J',
     name: 'James Hong',
     time: '11 months ago',
     meta: 'Local Guide - 678 reviews - 706 photos',
-    url: `${googleReviewsUrl}+James+Hong`,
-    text: 'This small out of the way restaurant was truly a gem. The food was very very fresh and very tasty. The service was great, the guy who was manning the front was very attentive despite how busy the restaurant became.'
+    url: 'https://maps.app.goo.gl/X3vbSFH78sE4T2gn8',
+    text: "This small out of the way restaurant was truly a gem. The food was very very fresh and very tasty. The service was great the guy who was manning the front was very attentive despite the fact that while we were there the restaurant became almost completely full. If you're looking for a good home cooked meal out on the road or if you live in the area definitely try them out you won't be disappointed!"
   }
 ];
 
