@@ -4,6 +4,7 @@ import {
   ArrowRight,
   Clock3,
   Flame,
+  Mail,
   MapPin,
   Menu as MenuIcon,
   Phone,
@@ -54,6 +55,8 @@ const tickerItems = [
   'Buttermilk Pancakes',
   'Southern Hospitality'
 ];
+
+const email = 'Info@countrysunrisegrill.com';
 
 const hours = [
   ['Monday', '5am-2pm'],
@@ -278,7 +281,7 @@ function Nav() {
   const [open, setOpen] = React.useState(false);
   const route = getRoute();
   const isMenuPage = route === '/menu';
-  const isLegalPage = route === '/privacy' || route === '/terms';
+  const isLegalPage = route === '/privacy' || route === '/terms' || route === '/contact';
   const links = isMenuPage
     ? [
         ['Home', withBase('/')],
@@ -429,7 +432,7 @@ function Visit() {
         </div>
         <p><MapPin size={19} /> 1023 W St James St, Tarboro, NC 27886</p>
         <a href="tel:+12528237183"><Phone size={18} /> (252) 823-7183</a>
-        {/* <p><Clock3 size={18} /> Open - Closes 8 PM</p> */}
+        <a href={`mailto:${email}`}><Mail size={18} /> {email}</a>
         <div className="hours-card" aria-label="Restaurant hours">
           <h3><Clock3 size={19} /> Hours</h3>
           {hours.map(([day, time]) => (
@@ -599,6 +602,8 @@ function PrivacyPage() {
             1023 W St James St, Tarboro, NC 27886
             <br />
             <a href="tel:+12528237183">(252) 823-7183</a>
+            <br />
+            <a href={`mailto:${email}`}>{email}</a>
           </p>
         </article>
       </section>
@@ -706,7 +711,40 @@ function TermsPage() {
             1023 W St James St, Tarboro, NC 27886
             <br />
             <a href="tel:+12528237183">(252) 823-7183</a>
+            <br />
+            <a href={`mailto:${email}`}>{email}</a>
           </p>
+        </article>
+      </section>
+    </main>
+  );
+}
+
+function ContactPage() {
+  return (
+    <main className="legal-page grain">
+      <section className="legal-hero">
+        <span className="status"><span /> Country Sunrise Grill & BBQ</span>
+        <h1>Contact Us</h1>
+        <p>Questions about the menu, hours, or a to-go order? Reach us by phone, email, or stop by in person.</p>
+        <div className="hero-actions">
+          <a className="btn navy" href={withBase('/')}>
+            <ArrowRight size={18} /> Back Home
+          </a>
+          <a className="btn brick" href="tel:+12528237183">
+            <Phone size={18} /> Call Us
+          </a>
+          <a className="btn brick" href={`mailto:${email}`}>
+            <Mail size={18} /> Email Us
+          </a>
+        </div>
+      </section>
+      <section className="legal-board">
+        <article className="legal-card contact-card">
+          <h2>Get In Touch</h2>
+          <p><MapPin size={18} /> 1023 W St James St, Tarboro, NC 27886</p>
+          <p><Phone size={18} /> <a href="tel:+12528237183">(252) 823-7183</a></p>
+          <p><Mail size={18} /> <a href={`mailto:${email}`}>{email}</a></p>
         </article>
       </section>
     </main>
@@ -721,6 +759,7 @@ function Footer() {
         <span>2026 Country Sunrise Grill & BBQ - Tarboro, NC</span>
         <span>Dine-in - Takeout</span>
         <nav className="footer-links" aria-label="Legal">
+          <a href={withBase('/contact')}>Contact Us</a>
           <a href={withBase('/privacy')}>Privacy Policy</a>
           <a href={withBase('/terms')}>Terms of Service</a>
         </nav>
@@ -792,6 +831,7 @@ function App() {
   if (route === '/menu') page = <MenuPage />;
   else if (route === '/privacy') page = <PrivacyPage />;
   else if (route === '/terms') page = <TermsPage />;
+  else if (route === '/contact') page = <ContactPage />;
 
   return (
     <>

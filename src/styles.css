@@ -912,6 +912,12 @@ a.review-card:focus-visible {
   text-underline-offset: 3px;
 }
 
+.contact-card p {
+  align-items: center;
+  display: flex;
+  gap: 0.65rem;
+}
+
 .advisory-box {
   background: linear-gradient(180deg, rgba(255, 183, 45, 0.18), rgba(255, 183, 45, 0.06));
   border: 1px solid rgba(255, 183, 45, 0.6);

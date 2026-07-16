@@ -25,6 +25,7 @@ Output goes to `dist/`.
 
 - `/` - Home
 - `/menu` - Full menu
+- `/contact` - Contact Us
 - `/privacy` - Privacy Policy
 - `/terms` - Terms of Service
 
